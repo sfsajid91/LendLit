@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --primary: #00204a;
+    --accent: #ffd662;
+    --soft-gray: #f5f5f5;
+    --rich-brown: #8b572a;
+    --muted-green: #4caf50;
+}
