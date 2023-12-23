@@ -12,12 +12,12 @@ A web application named Lendlit, designed to facilitate book lovers in buying, s
 
 ## Features
 
-[ ] Buy and sell books
-[ ] Lend and borrow books
-[ ] Explore a diverse collection of genres
-[x] User-friendly interface
-[ ] Search and discover new books
-[ ] Track your book inventory and transactions
+-   [ ] Buy and sell books
+-   [ ] Lend and borrow books
+-   [ ] Explore a diverse collection of genres
+-   [x] User-friendly interface
+-   [ ] Search and discover new books
+-   [ ] Track your book inventory and transactions
 
 ## Technologies Used
 
