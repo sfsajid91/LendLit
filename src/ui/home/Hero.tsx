@@ -28,7 +28,6 @@ export default function Hero() {
                 <Image
                     src={heroImage}
                     alt="Hero Image"
-                    // placeholder="blur"
                     width={300}
                     height={300}
                     style={{
@@ -41,7 +40,6 @@ export default function Hero() {
                 src={heroBg}
                 alt="Hero Background Image"
                 placeholder="blur"
-                quality={100}
                 fill
                 sizes="100vw"
                 style={{
