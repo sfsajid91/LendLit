@@ -1,22 +1,15 @@
 import heroBg from '@/../public/home/hero-bg.png';
 import heroImage from '@/../public/home/hero-image.svg';
 import { Button } from '@/components/ui/button';
-import { Playfair_Display } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/link';
-
-const playfair = Playfair_Display({ subsets: ['latin'] });
+import Logo from '../Logo';
 
 export default function Hero() {
     return (
         <main className="relative flex h-screen flex-col items-center justify-center px-4 py-16 md:flex-row md:justify-between lg:px-16 lg:py-20">
             <div className="z-20">
-                <h1
-                    className={`text-4xl font-extrabold tracking-tight lg:text-5xl ${playfair.className}`}
-                >
-                    <span className="text-accent">Lend</span>
-                    <span className="text-primary">Lit</span>
-                </h1>
+                <Logo className="text-4xl lg:text-5xl" iconClass="size-10" />
                 <p className="leading-7 text-slate-300">
                     Explore, Share, Thrive. Your Hub for Book Adventures!
                 </p>
