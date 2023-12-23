@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# LendLit
+
+Lendlit Bookstore App
+
+<p align="center">
+<img src="https://i.ibb.co/m8R53Dw/LendLit.png" alt="LendLit">
+</p>
+
+## Description
+
+A web application named Lendlit, designed to facilitate book lovers in buying, selling, lending, and borrowing books. The app provides a platform for book enthusiasts to explore, share, and connect through the magic of literature.
+
+## Features
+
+[ ] Buy and sell books
+[ ] Lend and borrow books
+[ ] Explore a diverse collection of genres
+[x] User-friendly interface
+[ ] Search and discover new books
+[ ] Track your book inventory and transactions
+
+## Technologies Used
+
+-   Next.js
+-   React
+-   Lucide React (for icons)
+-   Tailwind CSS (for styling)
+-   TypeScript
+-   ShadCn
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+-   Node.js
+-   npm or yarn
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+    ```bash
+    git clone https://github.com/sfsajid91/lendlit.git
+    ```
 
-## Learn More
+2. Install dependencies.
 
-To learn more about Next.js, take a look at the following resources:
+    ```bash
+    cd lendlit
+    npm install
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    or
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+    ```bash
+    cd lendlit
+    yarn
+    ```
 
-## Deploy on Vercel
+3. Run the application.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    ```bash
+    npm run dev
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+4. Open your browser and navigate to [http://localhost:3000](http://localhost:3000).
+
+## Usage
+
+-   Explore the bookstore
+-   Buy, sell, lend, or borrow books
+
+<!-- ## Contributing -->
+
+<!-- Contributions are welcome! Please follow the [Contribution Guidelines](CONTRIBUTING.md). -->
+
+<!-- ## License
+
+This project is licensed under the [MIT License](LICENSE). -->
+
+## Acknowledgments
+
+-   Special thanks to [Lucide React](https://github.com/lucide-icons/lucide) for the icons.
+-   Special thanks to [ShadCn](https://ui.shadcn.com) for the ui.
+-   Many thanks to [Tapas Adhikary](https://github.com/atapas) for the [tutorial](https://youtu.be/bTBvoq3ww6Q?si=cq_EgdkTf0H_HVqm) on which this project is based.
