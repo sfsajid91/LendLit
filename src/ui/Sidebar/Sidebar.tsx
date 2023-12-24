@@ -9,10 +9,11 @@ import {
     HiOutlineInformationCircle,
     HiOutlineTruck,
 } from 'react-icons/hi';
+import { HiOutlineHome } from "react-icons/hi2";
 import { IoLibraryOutline } from 'react-icons/io5';
 
-const NavLinks = [
-    { title: 'Home', href: '/', icon: HiOutlineTruck },
+export const NavLinks = [
+    { title: 'Home', href: '/', icon: HiOutlineHome },
     { title: 'Books', href: '/store', icon: HiOutlineBookOpen },
     { title: 'Sell or Lend', href: '/store/sell-lend', icon: IoLibraryOutline },
     { title: 'Track Order', href: '/store/track-order', icon: HiOutlineTruck },
