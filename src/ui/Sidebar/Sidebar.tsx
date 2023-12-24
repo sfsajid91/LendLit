@@ -1,24 +1,23 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import {
-    BookOpen,
-    Home,
-    LayoutGrid,
-    Library,
-    Shield,
-    Truck,
-} from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import {
+    HiCubeTransparent,
+    HiOutlineBookOpen,
+    HiOutlineInformationCircle,
+    HiOutlineTruck,
+} from 'react-icons/hi';
+import { IoLibraryOutline } from 'react-icons/io5';
 
 const NavLinks = [
-    { title: 'Home', href: '/', icon: Home },
-    { title: 'Books', href: '/store', icon: BookOpen },
-    { title: 'Sell or Lend', href: '/store/sell-lend', icon: Library },
-    { title: 'Track Order', href: '/store/track-order', icon: Truck },
-    { title: 'About', href: '/store/about', icon: LayoutGrid },
-    { title: 'Admin', href: '/store/store/admin', icon: Shield },
+    { title: 'Home', href: '/', icon: HiOutlineTruck },
+    { title: 'Books', href: '/store', icon: HiOutlineBookOpen },
+    { title: 'Sell or Lend', href: '/store/sell-lend', icon: IoLibraryOutline },
+    { title: 'Track Order', href: '/store/track-order', icon: HiOutlineTruck },
+    { title: 'About', href: '/store/about', icon: HiOutlineInformationCircle },
+    { title: 'Admin', href: '/store/store/admin', icon: HiCubeTransparent },
 ];
 
 export default function Sidebar() {

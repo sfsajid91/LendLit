@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
-import { Sparkles } from 'lucide-react';
 import { Playfair_Display } from 'next/font/google';
+import { LuSparkles } from 'react-icons/lu';
 
 const playfair = Playfair_Display({ subsets: ['latin'] });
 
@@ -13,7 +13,7 @@ export default function Logo({
 }) {
     return (
         <div className="flex items-center" title="Logo">
-            <Sparkles className={cn('mr-2 size-6 text-primary', iconClass)} />
+            <LuSparkles className={cn('mr-2 size-6 text-primary', iconClass)} />
             <h1
                 className={cn(
                     'text-3xl font-extrabold tracking-tight lg:text-4xl',

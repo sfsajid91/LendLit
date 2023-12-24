@@ -1,8 +1,15 @@
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import {
+    Card,
+    CardContent,
+    CardFooter,
+    CardHeader,
+} from '@/components/ui/card';
 import shimmerPlaceholder from '@/lib/shimmer';
 import { BookType } from '@/types/book';
 import Image from 'next/image';
 import Link from 'next/link';
+import { LuHeart } from 'react-icons/lu';
 
 export default function BookCard({
     cover,
@@ -10,15 +17,16 @@ export default function BookCard({
     genre,
     id,
     author,
+    sellPrice,
+    rentPrice,
 }: BookType) {
     return (
-        <Card>
-            <CardHeader className="items-center p-2">
+        <Card className="flex flex-col *:p-2">
+            <CardHeader className="items-center">
                 <Image
                     src={cover}
                     alt={title}
-                    placeholder="blur"
-                    blurDataURL={shimmerPlaceholder(250, 250)}
+                    placeholder={shimmerPlaceholder(250, 250)}
                     width={250}
                     height={250}
                     style={{
@@ -28,7 +36,7 @@ export default function BookCard({
                     className="size-60"
                 />
             </CardHeader>
-            <CardContent className="space-y-2 p-2 *:duration-300">
+            <CardContent className="space-y-0.5 *:duration-300">
                 <h4 className="text-xs font-semibold uppercase text-primary">
                     {genre}
                 </h4>
@@ -46,7 +54,35 @@ export default function BookCard({
                         {author}
                     </Link>
                 </h4>
+                <div className="flex items-center justify-between text-sm">
+                    <span title={`$${sellPrice}`}>
+                        Buy for{' '}
+                        <span className="text-primary">${sellPrice}</span>
+                    </span>
+                    <span className="text-right" title={`$${rentPrice}/mo`}>
+                        Rent for{' '}
+                        <span className="text-primary">${rentPrice}/mo</span>
+                    </span>
+                </div>
             </CardContent>
+            <CardFooter className="group mt-auto justify-between">
+                <Button
+                    className="rounded-full border-primary hover:bg-primary hover:text-white"
+                    variant="outline"
+                    size="lg"
+                    title="Quick add"
+                >
+                    Quick add
+                </Button>
+                <Button
+                    variant="secondary"
+                    className="rounded-full border-primary opacity-0 transition hover:bg-primary hover:text-white group-hover:opacity-100"
+                    size="icon"
+                    title="Add to Favorites"
+                >
+                    <LuHeart className="text-2xl" />
+                </Button>
+            </CardFooter>
         </Card>
     );
 }

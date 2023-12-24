@@ -23,7 +23,7 @@ A web application named Lendlit, designed to facilitate book lovers in buying, s
 
 -   Next.js
 -   React
--   Lucide React (for icons)
+-   React Icons (for icons)
 -   Tailwind CSS (for styling)
 -   TypeScript
 -   ShadCn
@@ -80,6 +80,5 @@ This project is licensed under the [MIT License](LICENSE). -->
 
 ## Acknowledgments
 
--   Special thanks to [Lucide React](https://github.com/lucide-icons/lucide) for the icons.
 -   Special thanks to [ShadCn](https://ui.shadcn.com) for the ui.
 -   Many thanks to [Tapas Adhikary](https://github.com/atapas) for the [tutorial](https://youtu.be/bTBvoq3ww6Q?si=cq_EgdkTf0H_HVqm) on which this project is based.

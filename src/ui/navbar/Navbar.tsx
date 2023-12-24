@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
-import { LogOut, ShoppingCart, User } from 'lucide-react';
 import Link from 'next/link';
+import { LuLogOut, LuShoppingCart, LuUser } from 'react-icons/lu';
 import Logo from '../Logo';
 
 export default function Navbar() {
@@ -10,16 +10,21 @@ export default function Navbar() {
                 <Logo />
             </Link>
             <div className="flex gap-2">
-                <Button size="icon" variant="icon" title="Cart">
-                    <ShoppingCart />
+                <Button
+                    size="icon"
+                    className="text-2xl"
+                    variant="icon"
+                    title="Cart"
+                >
+                    <LuShoppingCart />
                 </Button>
                 <Button
                     size="icon"
-                    className="max-sm:hidden"
+                    className="text-2xl max-sm:hidden"
                     variant="icon"
                     title="User"
                 >
-                    <User />
+                    <LuUser />
                 </Button>
                 <form>
                     <Button
@@ -27,8 +32,9 @@ export default function Navbar() {
                         variant="icon"
                         type="submit"
                         title="Logout"
+                        className="text-2xl"
                     >
-                        <LogOut />
+                        <LuLogOut />
                     </Button>
                 </form>
             </div>
