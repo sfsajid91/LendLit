@@ -9,7 +9,7 @@ import {
     HiOutlineInformationCircle,
     HiOutlineTruck,
 } from 'react-icons/hi';
-import { HiOutlineHome } from "react-icons/hi2";
+import { HiOutlineHome } from 'react-icons/hi2';
 import { IoLibraryOutline } from 'react-icons/io5';
 
 export const NavLinks = [

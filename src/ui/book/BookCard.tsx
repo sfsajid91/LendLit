@@ -23,18 +23,20 @@ export default function BookCard({
     return (
         <Card className="flex flex-col *:p-2">
             <CardHeader className="items-center">
-                <Image
-                    src={cover}
-                    alt={title}
-                    placeholder={shimmerPlaceholder(250, 250)}
-                    width={250}
-                    height={250}
-                    style={{
-                        objectFit: 'cover',
-                        objectPosition: 'center',
-                    }}
-                    className="size-60"
-                />
+                <Link href={`/store/${id}`}>
+                    <Image
+                        src={cover}
+                        alt={title}
+                        placeholder={shimmerPlaceholder(250, 250)}
+                        width={250}
+                        height={250}
+                        style={{
+                            objectFit: 'cover',
+                            objectPosition: 'center',
+                        }}
+                        className="size-60 cursor-pointer rounded-md"
+                    />
+                </Link>
             </CardHeader>
             <CardContent className="space-y-0.5 *:duration-300">
                 <h4 className="text-xs font-semibold uppercase text-primary">
@@ -45,10 +47,10 @@ export default function BookCard({
                 </h4>
                 <h4>
                     <Link
-                        href={`/author/${author
+                        href={`/store?search=${author
                             .toLowerCase()
-                            .replace(/[^\w\s]/g, '')
-                            .replace(/\s+/g, '-')}`}
+
+                            .replace(/\s+/g, '+')}`}
                         className="text-xs text-gray-500 hover:text-primary/90"
                     >
                         {author}

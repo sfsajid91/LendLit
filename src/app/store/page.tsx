@@ -1,13 +1,36 @@
-import { getAllBooks } from '@/lib/fake-data';
-import BookCard from '@/ui/book/BookCard';
+import { getTotalPages } from '@/lib/fake-data';
+import BookList from '@/ui/book/BookList';
+import BookPagination from '@/ui/book/BookPagination';
+import Search from './[slug]/Search';
 
-export default function StorePage() {
-    const books = getAllBooks();
+type PageProps = {
+    searchParams: {
+        search?: string;
+        page?: string;
+    };
+};
+
+export default async function StorePage({ searchParams }: PageProps) {
+    const search = searchParams?.search || '';
+    const currentPage = Number(searchParams?.page) || 1;
+
+    const totalPages = await getTotalPages(search);
+
     return (
-        <div className="grid w-full grid-cols-1 justify-between gap-4 px-4 py-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {books.map((book) => (
-                <BookCard key={book.id} {...book} />
-            ))}
+        <div className="px-4 py-2">
+            <Search />
+            <BookList search={search} currentPage={currentPage} />
+            <div className="w-full py-4">
+                {
+                    // Only show pagination if there is more than one page
+                    totalPages > 1 && (
+                        <BookPagination
+                            totalPages={totalPages}
+                            currentPage={currentPage}
+                        />
+                    )
+                }
+            </div>
         </div>
     );
 }

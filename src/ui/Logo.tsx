@@ -16,7 +16,7 @@ export default function Logo({
             <LuSparkles className={cn('mr-2 size-6 text-primary', iconClass)} />
             <h1
                 className={cn(
-                    'text-3xl font-extrabold tracking-tight lg:text-4xl',
+                    'text-3xl font-extrabold tracking-tight antialiased lg:text-4xl',
                     playfair.className,
                     className
                 )}

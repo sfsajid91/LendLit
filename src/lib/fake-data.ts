@@ -1,5 +1,6 @@
 import { BookType } from '@/types/book';
 
+// eslint-disable-next-line no-unused-vars
 const users = [
     {
         id: '3958dc9e-712f-4377-85e9-fec4b6a6442a',
@@ -32,6 +33,39 @@ const books: BookType[] = [
         sold: 12,
         ISBN: '1-86092-049-7',
     },
+    {
+        id: 'e0cdfaa6-deee-4dd8-bfe6-cbcfeceffa8b',
+        title: 'To Kill a Mockingbird',
+        description:
+            "To Kill a Mockingbird is a novel by Harper Lee, published in 1960. It explores issues of racism, morality, and the innocence of childhood. The story is set in the fictional town of Maycomb, Alabama, during the Great Depression, and it follows the Finch family's struggles and challenges.",
+        author: 'Harper Lee',
+        cover: '/books/tgg.jpg',
+        genre: 'Classic',
+        pages: 336,
+        isRented: false,
+        stock: 25,
+        rentPrice: 18,
+        sellPrice: 180,
+        sold: 8,
+        ISBN: '1-86092-061-6',
+    },
+    {
+        id: 'e0cdfaa6-deee-4dd8-bfe6-cbcfeceffa8b',
+        title: 'To Kill a Mockingbird',
+        description:
+            'To Kill a Mockingbird is a novel by Harper Lee, published in 1960. It is widely considered one of the greatest American novels. The story is set in the fictional town of Maycomb, Alabama, during the Great Depression, and it explores themes of racial injustice and moral growth.',
+        author: 'Harper Lee',
+        cover: '/books/murder.png',
+        genre: 'Classic',
+        pages: 336,
+        isRented: true,
+        stock: 20,
+        rentPrice: 18,
+        sellPrice: 200,
+        sold: 8,
+        ISBN: '1-86092-050-5',
+    },
+
     {
         id: 'e0cdfaa6-deee-4dd8-bfe6-cbcfeceffa8a',
         title: 'Murder!',
@@ -157,4 +191,39 @@ export const getAllBooks = () => {
 
 export const getBookById = (id: string) => {
     return books.find((book) => book.id === id);
+};
+
+export const pageSize = 16;
+
+export const getFilteredBooks = (search: string, currentPage: number) => {
+    const filteredBooks = books.filter((book) => {
+        const titleMatch = book.title
+            .toLowerCase()
+            .includes(search.toLowerCase());
+        const authorMatch = book.author
+            .toLowerCase()
+            .includes(search.toLowerCase());
+        return titleMatch || authorMatch;
+    });
+
+    const startIndex = (currentPage - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    const paginatedBooks = filteredBooks.slice(startIndex, endIndex);
+
+    return paginatedBooks;
+};
+
+export const getTotalPages = (search: string) => {
+    const filteredBooks = books.filter((book) => {
+        const titleMatch = book.title
+            .toLowerCase()
+            .includes(search.toLowerCase());
+        const authorMatch = book.author
+            .toLowerCase()
+            .includes(search.toLowerCase());
+        return titleMatch || authorMatch;
+    });
+
+    const totalPages = Math.ceil(filteredBooks.length / pageSize);
+    return totalPages;
 };
