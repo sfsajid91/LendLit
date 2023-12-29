@@ -1,7 +1,7 @@
 import { getTotalPages } from '@/lib/fake-data';
 import BookList from '@/ui/book/BookList';
 import BookPagination from '@/ui/book/BookPagination';
-import Search from './[slug]/Search';
+import Search from '@/ui/book/Search';
 
 type PageProps = {
     searchParams: {

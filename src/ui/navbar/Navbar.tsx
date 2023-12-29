@@ -13,7 +13,7 @@ export default function Navbar() {
 
     return (
         <>
-            <nav className="sticky top-0 flex items-center justify-between bg-white bg-opacity-70 px-4 py-2 shadow backdrop-blur-sm md:mx-4">
+            <nav className="sticky top-0 z-50 flex items-center justify-between bg-white bg-opacity-70 px-4 py-2 shadow backdrop-blur-sm md:mx-4">
                 <div className="flex gap-1">
                     <Button
                         className="md:hidden"

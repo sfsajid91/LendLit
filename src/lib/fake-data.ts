@@ -18,7 +18,7 @@ const users = [
 
 const books: BookType[] = [
     {
-        id: 'e0cdfaa6-ceee-4dd9-bfe6-cbcfeceffa8a',
+        id: 'e0cdfaa6-ceee-4dd9-bfc6-cbcfeceffa8a',
         title: 'The Great Gatsby',
         description:
             "The Great Gatsby, third novel by F. Scott Fitzgerald, published in 1925 by Charles Scribner's Sons. Set in Jazz Age New York, the novel tells the tragic story of Jay Gatsby, a self-made millionaire, and his pursuit of Daisy Buchanan, a wealthy young woman whom he loved in his youth.",
@@ -34,7 +34,7 @@ const books: BookType[] = [
         ISBN: '1-86092-049-7',
     },
     {
-        id: 'e0cdfaa6-deee-4dd8-bfe6-cbcfeceffa8b',
+        id: 'e0cdfaa6-deee-4dd8-bfe6-cbcfereffapb',
         title: 'To Kill a Mockingbird',
         description:
             "To Kill a Mockingbird is a novel by Harper Lee, published in 1960. It explores issues of racism, morality, and the innocence of childhood. The story is set in the fictional town of Maycomb, Alabama, during the Great Depression, and it follows the Finch family's struggles and challenges.",
@@ -67,7 +67,7 @@ const books: BookType[] = [
     },
 
     {
-        id: 'e0cdfaa6-deee-4dd8-bfe6-cbcfeceffa8a',
+        id: 'e0cdfaa6-dffe-4dd8-bfe6-cbcfeceffa8a',
         title: 'Murder!',
         description:
             'Stories in the Travelman Short Stories series take the reader to places of mystery, fantasy, horror, romance, and corners of the universe yet unexplored.',
@@ -100,7 +100,7 @@ const books: BookType[] = [
         ISBN: '1-86092-051-X',
     },
     {
-        id: 'e0cdfaa6-aeee-4dd9-bfe6-cbcfeceffa8a',
+        id: 'e0cdfaa6-aeee-4dd9-bfe6-mmcfeceffa8a',
         title: 'Pride and Prejudice',
         description:
             'Pride and Prejudice follows the turbulent relationship between Elizabeth Bennet, the daughter of a country gentleman, and Fitzwilliam Darcy, a rich aristocratic landowner. They must overcome the titular sins of pride and prejudice in order to fall in love and marry.',
@@ -116,7 +116,7 @@ const books: BookType[] = [
         ISBN: '1-86092-052-8',
     },
     {
-        id: 'e0cdfaa6-beee-4dd9-bfe6-cbcfeceffa8a',
+        id: 'e0cdfaa6-veee-4dd9-bfe6-cbcfeceffa8a',
         title: 'War and Peace',
         description:
             "War and Peace broadly focuses on Napoleon's invasion of Russia in 1812 and follows three of the most well-known characters in literature: Pierre Bezukhov, the illegitimate son of a count who is fighting for his inheritance and yearning for spiritual fulfillment;",
@@ -132,10 +132,10 @@ const books: BookType[] = [
         ISBN: '1-86092-053-6',
     },
     {
-        id: 'e0cdfaa6-beee-4dd9-bfe6-cbcfeceffa8b',
+        id: 'e0cdfaa6-beee-4dd9-fffd-cbcfeceffa8b',
         title: 'The Man',
         description:
-            'The story of a brilliant man whose unflinching dedication to independence of thought and transparency in business sparked an entire industry--and whose personal tribulations humbled and strengthened him. Through it all, Alfred Best remained the eternal optimist.',
+            'The story of a brilliant man whose unflinching dedication to independence of thought and transparency in business sparked an entire industry--and whose personal tribulations humbled and strengthened him.\n\n Through it all, Alfred Best remained the eternal optimist.',
         author: 'AM Best',
         cover: '/books/the_man.jpg',
         genre: 'Biography',
@@ -152,7 +152,7 @@ const books: BookType[] = [
         ],
     },
     {
-        id: 'e0cdfaa6-beee-4dd9-bfe6-cbcfeceffa8c',
+        id: 'e0cdfaa6-beee-4dd9-eerr-cbcfeceffa8c',
         title: 'The Alchemist',
         description:
             'The Alchemist is a novel by Brazilian author Paulo Coelho which was first published in 1988. Originally written in Portuguese, it became a widely translated international bestseller.',
@@ -168,7 +168,7 @@ const books: BookType[] = [
         ISBN: '1-86092-055-2',
     },
     {
-        id: 'e0cdfaa6-beee-4dd9-bfe6-cbcfeceffa8d',
+        id: 'e0cdfaa6-beee-2dd9-bfe6-cbcfeceffa8d',
         title: 'Moby Dick',
         description:
             "Herman Melville's Moby Dick is the story of Captain Ahab's self-destructive obsession with the white whale called Moby Dick. It is told through the narration of Ishmael, a sailor new to Ahab's ship, the Pequod. The plot of the novel follows Ahab's manic drive to kill the whale, even as it endangers his crew.",

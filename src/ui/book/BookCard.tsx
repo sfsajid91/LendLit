@@ -21,7 +21,7 @@ export default function BookCard({
     rentPrice,
 }: BookType) {
     return (
-        <Card className="flex flex-col *:p-2">
+        <Card className="flex flex-col duration-1000 animate-in fade-in *:p-2">
             <CardHeader className="items-center">
                 <Link href={`/store/${id}`}>
                     <Image
