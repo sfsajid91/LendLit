@@ -1,9 +1,12 @@
 import { getBookById } from '@/lib/fake-data';
 import shimmerPlaceholder from '@/lib/shimmer';
+import AddCart from '@/ui/book/AddCart';
 import PriceRadio from '@/ui/book/PriceRadio';
 import Image from 'next/image';
 import Link from 'next/link';
-import { HiOutlineTruck } from 'react-icons/hi';
+import { notFound } from 'next/navigation';
+import { HiOutlineBookOpen, HiOutlineTruck } from 'react-icons/hi2';
+import { TbBooks } from 'react-icons/tb';
 
 type PageProps = {
     params: {
@@ -19,6 +22,7 @@ export default function BookDetails({
     searchParams: { status },
 }: PageProps) {
     const book = getBookById(slug);
+    if (!book) return notFound();
     const currentStatus = status || 'buy';
 
     return (
@@ -68,6 +72,17 @@ export default function BookDetails({
                     </h4>
                 </div>
                 {/* <!-- name - end --> */}
+
+                <div className="my-2 space-y-2">
+                    <h4 className="flex gap-2 text-sm">
+                        <HiOutlineBookOpen className="text-2xl text-primary" />{' '}
+                        <span>Pages: {book?.pages}</span>
+                    </h4>
+                    <h4 className="flex gap-2 text-sm">
+                        <TbBooks className="text-2xl text-primary" />{' '}
+                        <span>Sold: {book?.sold}</span>
+                    </h4>
+                </div>
 
                 {/* <!-- rating - start --> */}
                 {/* <div className="mb-6 flex items-center md:mb-10">
@@ -157,36 +172,9 @@ export default function BookDetails({
                 </div>
                 {/* <!-- shipping notice - end --> */}
 
-                {/* <!-- buttons - start --> */}
-                <div className="flex gap-2.5">
-                    <a
-                        href="#"
-                        className="inline-block flex-1 rounded-lg bg-indigo-500 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-indigo-300 transition duration-100 hover:bg-indigo-600 focus-visible:ring active:bg-indigo-700 sm:flex-none md:text-base"
-                    >
-                        Add to cart
-                    </a>
+                {/* Add Cart */}
+                <AddCart book={book} type={currentStatus} />
 
-                    <a
-                        href="#"
-                        className="inline-block rounded-lg bg-gray-200 px-4 py-3 text-center text-sm font-semibold text-gray-500 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-300 focus-visible:ring active:text-gray-700 md:text-base"
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-6 w-6"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                            />
-                        </svg>
-                    </a>
-                </div>
-                {/* <!-- buttons - end --> */}
                 {/* <!-- description - start --> */}
                 <div className="mt-10 md:mt-16 lg:mt-20">
                     <h3 className="mb-3 text-lg font-semibold text-gray-800">

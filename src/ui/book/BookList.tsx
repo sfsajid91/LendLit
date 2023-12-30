@@ -11,7 +11,7 @@ export default async function BookList({ search, currentPage }: PageProps) {
     return (
         <div className="grid w-full grid-cols-1 justify-between gap-4 py-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {books.map((book) => (
-                <BookCard key={book.id} {...book} />
+                <BookCard key={book.id} book={book} />
             ))}
         </div>
     );

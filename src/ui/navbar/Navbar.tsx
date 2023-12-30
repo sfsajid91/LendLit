@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { useCart } from '@/provider/CartProvider';
 import Link from 'next/link';
 import { useState } from 'react';
 import { HiOutlineMenuAlt2 } from 'react-icons/hi';
@@ -10,6 +11,9 @@ import SideDrawer from '../SideDrawer/SideDrawer';
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
+    const {
+        state: { quantity },
+    } = useCart();
 
     return (
         <>
@@ -30,11 +34,19 @@ export default function Navbar() {
                 <div className="flex gap-2">
                     <Button
                         size="icon"
-                        className="text-2xl"
+                        className="relative text-2xl"
                         variant="icon"
                         title="Cart"
+                        asChild
                     >
-                        <LuShoppingCart />
+                        <Link href="/store/cart">
+                            <LuShoppingCart />
+                            {quantity > 0 && (
+                                <h3 className="absolute -top-1 right-0 size-4 rounded-full bg-primary text-center text-xs text-white">
+                                    {quantity > 99 ? '99+' : quantity}
+                                </h3>
+                            )}
+                        </Link>
                     </Button>
                     <Button
                         size="icon"

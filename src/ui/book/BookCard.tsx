@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button';
 import {
     Card,
     CardContent,
@@ -9,17 +8,11 @@ import shimmerPlaceholder from '@/lib/shimmer';
 import { BookType } from '@/types/book';
 import Image from 'next/image';
 import Link from 'next/link';
-import { LuHeart } from 'react-icons/lu';
+import AddCart from './AddCart';
 
-export default function BookCard({
-    cover,
-    title,
-    genre,
-    id,
-    author,
-    sellPrice,
-    rentPrice,
-}: BookType) {
+export default function BookCard({ book }: { book: BookType }) {
+    const { cover, title, genre, id, author, sellPrice, rentPrice } = book;
+
     return (
         <Card className="flex flex-col duration-1000 animate-in fade-in *:p-2">
             <CardHeader className="items-center">
@@ -67,23 +60,8 @@ export default function BookCard({
                     </span>
                 </div>
             </CardContent>
-            <CardFooter className="group mt-auto justify-between">
-                <Button
-                    className="rounded-full border-primary hover:bg-primary hover:text-white"
-                    variant="outline"
-                    size="lg"
-                    title="Quick add"
-                >
-                    Quick add
-                </Button>
-                <Button
-                    variant="secondary"
-                    className="rounded-full border-primary opacity-0 transition hover:bg-primary hover:text-white group-hover:opacity-100"
-                    size="icon"
-                    title="Add to Favorites"
-                >
-                    <LuHeart className="text-2xl" />
-                </Button>
+            <CardFooter className="mt-auto *:justify-between">
+                <AddCart book={book} type="buy" simplified />
             </CardFooter>
         </Card>
     );
