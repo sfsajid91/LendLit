@@ -7,12 +7,17 @@ const playfair = Playfair_Display({ subsets: ['latin'] });
 export default function Logo({
     className,
     iconClass,
+    containerClass,
 }: {
     className?: string;
     iconClass?: string;
+    containerClass?: string;
 }) {
     return (
-        <div className="flex items-center" title="Logo">
+        <div
+            className={cn('flex cursor-pointer items-center', containerClass)}
+            title="Logo"
+        >
             <LuSparkles className={cn('mr-2 size-6 text-primary', iconClass)} />
             <h1
                 className={cn(
