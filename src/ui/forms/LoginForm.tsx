@@ -2,9 +2,9 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import * as z from 'zod';
 
 import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 import {
     Form,
     FormControl,
@@ -14,27 +14,27 @@ import {
     FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-
-const formSchema = z.object({
-    email: z.string().email({
-        message: 'Please enter a valid email address',
-    }),
-    password: z
-        .string()
-        .min(8, { message: 'Password must be at least 8 characters long' }),
-});
+import type { SigninSchemaType } from '@/lib/schema/signinSchema';
+import { signinSchema } from '@/lib/schema/signinSchema';
+import { useState } from 'react';
 
 export default function LoginForm() {
     // ...
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const form = useForm<SigninSchemaType>({
+        resolver: zodResolver(signinSchema),
         defaultValues: {
             email: '',
             password: '',
         },
     });
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
+    const [showPassword, setShowPassword] = useState(false);
+
+    const toggleShowPassword = (isChecked: boolean) => {
+        setShowPassword(isChecked);
+    };
+
+    async function onSubmit(values: SigninSchemaType) {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
         console.log(values);
@@ -42,7 +42,7 @@ export default function LoginForm() {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 <FormField
                     control={form.control}
                     name="email"
@@ -67,12 +67,30 @@ export default function LoginForm() {
                         <FormItem>
                             <FormLabel>Password</FormLabel>
                             <FormControl>
-                                <Input type="password" {...field} />
+                                <Input
+                                    type={showPassword ? 'text' : 'password'}
+                                    {...field}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
                     )}
                 />
+
+                <div className="items-top flex space-x-2">
+                    <Checkbox
+                        id="showpassword"
+                        // checked={showPassword}
+                        onCheckedChange={toggleShowPassword}
+                    />
+                    <label
+                        htmlFor="showpassword"
+                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
+                        Show Password
+                    </label>
+                </div>
+
                 <Button size="lg" type="submit" className="w-full">
                     Login
                 </Button>

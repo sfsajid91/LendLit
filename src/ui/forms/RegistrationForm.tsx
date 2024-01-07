@@ -2,9 +2,9 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import * as z from 'zod';
 
 import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 import {
     Form,
     FormControl,
@@ -14,36 +14,13 @@ import {
     FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-
-const userSchema = z
-    .object({
-        name: z
-            .string()
-            .trim()
-            .min(2, { message: 'Name must be at least 2 characters long' })
-            .max(50, { message: 'Name must be less than 50 characters long' }),
-        email: z.string().email({
-            message: 'Please enter a valid email address',
-        }),
-        password: z
-            .string()
-            .min(8, { message: 'Password must be at least 8 characters long' }),
-
-        confirmPassword: z.string(),
-    })
-    .superRefine((values, ctx) => {
-        if (values.password !== values.confirmPassword) {
-            ctx.addIssue({
-                code: 'custom',
-                message: 'Passwords do not match',
-                path: ['confirmPassword'], // Highlight the problematic field
-            });
-        }
-    });
+import type { SignupSchemaType } from '@/lib/schema/signupSchema';
+import { signupSchema } from '@/lib/schema/signupSchema';
+import { useState } from 'react';
 
 export default function RegistrationForm() {
-    const form = useForm<z.infer<typeof userSchema>>({
-        resolver: zodResolver(userSchema),
+    const form = useForm<SignupSchemaType>({
+        resolver: zodResolver(signupSchema),
         defaultValues: {
             name: '',
             email: '',
@@ -52,7 +29,13 @@ export default function RegistrationForm() {
         },
     });
 
-    function onSubmit(values: z.infer<typeof userSchema>) {
+    const [showPassword, setShowPassword] = useState(false);
+
+    const toggleShowPassword = (isChecked: boolean) => {
+        setShowPassword(isChecked);
+    };
+
+    function onSubmit(values: SignupSchemaType) {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
         console.log(values);
@@ -60,10 +43,7 @@ export default function RegistrationForm() {
 
     return (
         <Form {...form}>
-            <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-4 md:space-y-8"
-            >
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 <FormField
                     control={form.control}
                     name="name"
@@ -102,7 +82,10 @@ export default function RegistrationForm() {
                         <FormItem>
                             <FormLabel>Password</FormLabel>
                             <FormControl>
-                                <Input type="password" {...field} />
+                                <Input
+                                    type={showPassword ? 'text' : 'password'}
+                                    {...field}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -116,12 +99,38 @@ export default function RegistrationForm() {
                         <FormItem>
                             <FormLabel>Confirm Password</FormLabel>
                             <FormControl>
-                                <Input type="password" {...field} />
+                                <Input
+                                    type={showPassword ? 'text' : 'password'}
+                                    {...field}
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
                     )}
                 />
+
+                <div className="items-top flex space-x-2">
+                    <Checkbox
+                        id="showpassword"
+                        // checked={showPassword}
+                        onCheckedChange={toggleShowPassword}
+                    />
+                    <label
+                        htmlFor="showpassword"
+                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
+                        Show Password
+                    </label>
+                </div>
+
+                <p className="text-sm text-gray-500">
+                    By clicking Register, you agree to our{' '}
+                    <a href="#" className="font-medium text-gray-900 underline">
+                        Terms of Service
+                    </a>
+                    .
+                </p>
+
                 <Button size="lg" type="submit" className="w-full">
                     Register
                 </Button>
