@@ -14,6 +14,7 @@ import {
     FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { signinAction } from '@/lib/actions/authActions';
 import type { SigninSchemaType } from '@/lib/schema/signinSchema';
 import { signinSchema } from '@/lib/schema/signinSchema';
 import { useState } from 'react';
@@ -29,6 +30,7 @@ export default function LoginForm() {
     });
 
     const [showPassword, setShowPassword] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const toggleShowPassword = (isChecked: boolean) => {
         setShowPassword(isChecked);
@@ -37,7 +39,17 @@ export default function LoginForm() {
     async function onSubmit(values: SigninSchemaType) {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
-        console.log(values);
+        setLoading(true);
+        const result = await signinAction(values);
+        if (result?.errors) {
+            result.errors.map((error) => {
+                form.setError(error.field as keyof SigninSchemaType, {
+                    type: 'manual',
+                    message: error.message,
+                });
+            });
+        }
+        setLoading(false);
     }
 
     return (
@@ -91,7 +103,12 @@ export default function LoginForm() {
                     </label>
                 </div>
 
-                <Button size="lg" type="submit" className="w-full">
+                <Button
+                    loading={loading}
+                    size="lg"
+                    type="submit"
+                    className="w-full"
+                >
                     Login
                 </Button>
             </form>

@@ -14,8 +14,9 @@ import {
     FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import type { SignupSchemaType } from '@/lib/schema/signupSchema';
-import { signupSchema } from '@/lib/schema/signupSchema';
+import { signupAction } from '@/lib/actions/authActions';
+import { signupSchema, type SignupSchemaType } from '@/lib/schema/signupSchema';
+import Link from 'next/link';
 import { useState } from 'react';
 
 export default function RegistrationForm() {
@@ -30,16 +31,27 @@ export default function RegistrationForm() {
     });
 
     const [showPassword, setShowPassword] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const toggleShowPassword = (isChecked: boolean) => {
         setShowPassword(isChecked);
     };
 
-    function onSubmit(values: SignupSchemaType) {
+    const onSubmit = async (values: SignupSchemaType) => {
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
-        console.log(values);
-    }
+        setLoading(true);
+        const result = await signupAction(values);
+        if (result?.errors) {
+            result.errors.map((error) => {
+                form.setError(error.field as keyof SignupSchemaType, {
+                    type: 'manual',
+                    message: error.message,
+                });
+            });
+        }
+        setLoading(false);
+    };
 
     return (
         <Form {...form}>
@@ -125,13 +137,21 @@ export default function RegistrationForm() {
 
                 <p className="text-sm text-gray-500">
                     By clicking Register, you agree to our{' '}
-                    <a href="#" className="font-medium text-gray-900 underline">
+                    <Link
+                        href="/terms"
+                        className="font-medium text-gray-900 underline"
+                    >
                         Terms of Service
-                    </a>
+                    </Link>
                     .
                 </p>
 
-                <Button size="lg" type="submit" className="w-full">
+                <Button
+                    loading={loading}
+                    size="lg"
+                    type="submit"
+                    className="w-full"
+                >
                     Register
                 </Button>
             </form>

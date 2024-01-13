@@ -21,6 +21,7 @@ model User {
   image_url String?   @db.VarChar(255)
   password  String?  @db.VarChar(255)
   role      Role     @default(USER)
+  verified  Boolean  @default(false)
   createdAt DateTime @default(now()) @db.Timestamp(6)
   updatedAt DateTime @updatedAt
   books     Book[]
