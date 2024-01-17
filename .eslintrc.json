@@ -1,11 +1,15 @@
 {
-    "plugins": ["react", "prettier"],
+    "plugins": ["react", "prettier", "cypress"],
+    "env": {
+        "cypress/globals": true
+    },
 
     "extends": [
         "next/core-web-vitals",
         "eslint:recommended",
         "plugin:react/recommended",
-        "plugin:prettier/recommended"
+        "plugin:prettier/recommended",
+        "plugin:cypress/recommended"
     ],
     "rules": {
         "no-underscore-dangle": "off",
