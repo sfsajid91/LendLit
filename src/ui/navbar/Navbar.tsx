@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { signoutAction } from '@/lib/actions/authActions';
 import { useCart } from '@/provider/CartProvider';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -56,7 +57,7 @@ export default function Navbar() {
                     >
                         <LuUser />
                     </Button>
-                    <form>
+                    <form action={signoutAction}>
                         <Button
                             size="icon"
                             variant="icon"

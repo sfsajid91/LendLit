@@ -1,6 +1,5 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
 import { Button } from '@/components/ui/button';
@@ -15,12 +14,11 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { signinAction } from '@/lib/actions/authActions';
-import type { SigninSchemaType } from '@/lib/schema/signinSchema';
-import { signinSchema } from '@/lib/schema/signinSchema';
+import { signinSchema, type SigninSchemaType } from '@/lib/schema/signinSchema';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 
 export default function LoginForm() {
-    // ...
     const form = useForm<SigninSchemaType>({
         resolver: zodResolver(signinSchema),
         defaultValues: {
@@ -37,8 +35,6 @@ export default function LoginForm() {
     };
 
     async function onSubmit(values: SigninSchemaType) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
         setLoading(true);
         const result = await signinAction(values);
         if (result?.errors) {

@@ -38,8 +38,6 @@ export default function RegistrationForm() {
     };
 
     const onSubmit = async (values: SignupSchemaType) => {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
         setLoading(true);
         const result = await signupAction(values);
         if (result?.errors) {

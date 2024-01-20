@@ -3,8 +3,13 @@
 import type { SignupSchemaType } from '@/lib/schema/signupSchema';
 import { signupSchema } from '@/lib/schema/signupSchema';
 
+import { signIn, signOut } from '@/auth';
+import prisma from '@/lib/prisma';
 import type { SigninSchemaType } from '@/lib/schema/signinSchema';
 import { signinSchema } from '@/lib/schema/signinSchema';
+import bcrypt from 'bcrypt';
+import { AuthError } from 'next-auth';
+import { redirect } from 'next/navigation';
 
 export const signupAction = async (data: SignupSchemaType) => {
     const validation = signupSchema.safeParse(data);
@@ -17,6 +22,37 @@ export const signupAction = async (data: SignupSchemaType) => {
             })),
         };
     }
+
+    const { name, email, password } = validation.data;
+
+    const existingUser = await prisma.user.findUnique({
+        where: {
+            email,
+        },
+    });
+
+    if (existingUser) {
+        return {
+            errors: [
+                {
+                    field: 'email',
+                    message: 'User already exists with this email.',
+                },
+            ],
+        };
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    await prisma.user.create({
+        data: {
+            name,
+            email,
+            password: hashedPassword,
+        },
+    });
+
+    redirect('/login');
 };
 
 export const signinAction = async (data: SigninSchemaType) => {
@@ -30,4 +66,42 @@ export const signinAction = async (data: SigninSchemaType) => {
             })),
         };
     }
+
+    const generateErrorResponse = (error: string, all: boolean = true) => {
+        const errors = [
+            {
+                field: 'email',
+                message: error,
+            },
+        ];
+        if (all) {
+            errors.push({
+                field: 'password',
+                message: error,
+            });
+        }
+        return {
+            errors,
+        };
+    };
+
+    try {
+        await signIn('credentials', validation.data);
+    } catch (error) {
+        if (error instanceof AuthError) {
+            switch (error.type) {
+                case 'CredentialsSignin':
+                    return generateErrorResponse('Invalid credentials.');
+                case 'AuthorizedCallbackError':
+                    return generateErrorResponse('Email not verified.', false);
+                default:
+                    return generateErrorResponse('Something went wrong.');
+            }
+        }
+        throw error;
+    }
+};
+
+export const signoutAction = async () => {
+    await signOut();
 };

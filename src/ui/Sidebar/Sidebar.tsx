@@ -18,7 +18,7 @@ export const NavLinks = [
     { title: 'Sell or Lend', href: '/store/sell-lend', icon: IoLibraryOutline },
     { title: 'Track Order', href: '/store/track-order', icon: HiOutlineTruck },
     { title: 'About', href: '/store/about', icon: HiOutlineInformationCircle },
-    { title: 'Admin', href: '/store/store/admin', icon: HiCubeTransparent },
+    { title: 'Admin', href: '/store/admin', icon: HiCubeTransparent },
 ];
 
 export default function Sidebar() {
