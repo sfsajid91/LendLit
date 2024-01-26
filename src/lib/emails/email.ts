@@ -23,10 +23,9 @@ export const sendVerificationEmail = async (
 
     const { error } = await resend.emails.send({
         from,
-        to: [email],
+        to: email,
         subject: 'Verify your email address',
         react: EmailTemplate,
-        text: 'Verify your email address',
     });
 
     if (error) {
