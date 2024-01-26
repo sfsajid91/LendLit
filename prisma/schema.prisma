@@ -62,3 +62,12 @@ model Book {
   ISBN        String @db.VarChar(30)
   renters     User[]
 }
+
+model VerificationToken {
+  id      String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  email   String
+  token   String   @unique @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  expires DateTime
+
+  @@unique([email, token])
+}

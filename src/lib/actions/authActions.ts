@@ -4,12 +4,12 @@ import type { SignupSchemaType } from '@/lib/schema/signupSchema';
 import { signupSchema } from '@/lib/schema/signupSchema';
 
 import { signIn, signOut } from '@/auth';
+import { sendVerificationEmail } from '@/lib/emails/email';
 import prisma from '@/lib/prisma';
 import type { SigninSchemaType } from '@/lib/schema/signinSchema';
 import { signinSchema } from '@/lib/schema/signinSchema';
 import bcrypt from 'bcrypt';
 import { AuthError } from 'next-auth';
-import { redirect } from 'next/navigation';
 
 export const signupAction = async (data: SignupSchemaType) => {
     const validation = signupSchema.safeParse(data);
@@ -52,7 +52,19 @@ export const signupAction = async (data: SignupSchemaType) => {
         },
     });
 
-    redirect('/login');
+    const { error } = await sendVerificationEmail(name, email);
+
+    if (error) {
+        return {
+            success: false,
+            message: 'Something went wrong.',
+        };
+    }
+
+    return {
+        success: true,
+        message: 'Check your email for verification link.',
+    };
 };
 
 export const signinAction = async (data: SigninSchemaType) => {

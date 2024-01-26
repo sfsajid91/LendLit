@@ -16,8 +16,14 @@ import {
 import { Input } from '@/components/ui/input';
 import { signupAction } from '@/lib/actions/authActions';
 import { signupSchema, type SignupSchemaType } from '@/lib/schema/signupSchema';
+import { AlertDestructive, AlertSuccess } from '@/ui/alerts';
 import Link from 'next/link';
 import { useState } from 'react';
+
+type Message = {
+    message: string;
+    success: boolean | undefined;
+};
 
 export default function RegistrationForm() {
     const form = useForm<SignupSchemaType>({
@@ -33,13 +39,38 @@ export default function RegistrationForm() {
     const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
 
+    const [message, setMessage] = useState<Message>({
+        message: '',
+        success: undefined,
+    });
+
     const toggleShowPassword = (isChecked: boolean) => {
         setShowPassword(isChecked);
     };
 
     const onSubmit = async (values: SignupSchemaType) => {
         setLoading(true);
+        setMessage({
+            message: '',
+            success: undefined,
+        });
+
         const result = await signupAction(values);
+
+        if (!result?.success && result.message) {
+            setMessage({
+                message: result?.message as string,
+                success: false,
+            });
+        }
+
+        if (result.success && result.message) {
+            setMessage({
+                message: result?.message as string,
+                success: true,
+            });
+        }
+
         if (result?.errors) {
             result.errors.map((error) => {
                 form.setError(error.field as keyof SignupSchemaType, {
@@ -143,6 +174,12 @@ export default function RegistrationForm() {
                     </Link>
                     .
                 </p>
+
+                {message.success && <AlertSuccess message={message.message} />}
+
+                {message.success === false && (
+                    <AlertDestructive message={message.message} />
+                )}
 
                 <Button
                     loading={loading}
