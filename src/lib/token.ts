@@ -3,6 +3,7 @@ import prisma from '@/lib/prisma';
 
 export const generateVerificationToken = async (
     email: string,
+    userId: string,
     deleteOld: boolean = false
 ) => {
     const oneDay = 24 * 60 * 60 * 1000;
@@ -27,6 +28,7 @@ export const generateVerificationToken = async (
         data: {
             email,
             expires,
+            userId,
         },
     });
 

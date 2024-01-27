@@ -4,19 +4,22 @@ import { generateVerificationToken } from '@/lib/token';
 
 export const sendVerificationEmail = async (
     name: string,
-    email: string
+    email: string,
+    userId: string
     // token: string
 ) => {
     const { token: verificationToken } = await generateVerificationToken(
         email,
+        userId,
         true
     );
-    const verificationUrl =
-        `${process.env.AUTH_URL}/verify-email?token=${verificationToken.token}` as string;
+    const verificationUrl = `${
+        process.env.AUTH_URL || 'http://' + process.env.VERCEL_URL
+    }/verify?token=${verificationToken.token}` as string;
 
     const EmailTemplate = VerificationEmail({
         verificationUrl,
-        name: 'sajid',
+        name,
     });
 
     const from = `${process.env.SENDER_NAME} <${process.env.SENDER_EMAIL}>`;

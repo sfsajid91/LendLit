@@ -1,6 +1,6 @@
 import type { NextAuthConfig } from 'next-auth';
 
-const authRoute = ['/login', '/registration'];
+const authRoute = ['/login', '/registration', '/verify'];
 const publicRoute = ['/about', '/'];
 const authApiRoute = '/api/auth';
 

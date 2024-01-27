@@ -44,7 +44,7 @@ export const signupAction = async (data: SignupSchemaType) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    await prisma.user.create({
+    const user = await prisma.user.create({
         data: {
             name,
             email,
@@ -52,7 +52,7 @@ export const signupAction = async (data: SignupSchemaType) => {
         },
     });
 
-    const { error } = await sendVerificationEmail(name, email);
+    const { error } = await sendVerificationEmail(name, email, user.id);
 
     if (error) {
         return {
