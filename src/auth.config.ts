@@ -1,8 +1,5 @@
+import { authApiRoute, authRoute, publicRoute } from '@/lib/routes';
 import type { NextAuthConfig } from 'next-auth';
-
-const authRoute = ['/login', '/registration', '/verify'];
-const publicRoute = ['/about', '/'];
-const authApiRoute = '/api/auth';
 
 export const authConfig = {
     pages: {
@@ -29,9 +26,22 @@ export const authConfig = {
                 const callbackUrl = nextUrl.searchParams.get('callbackUrl');
                 if (callbackUrl) {
                     const paramUrl = new URL(callbackUrl);
-                    if (authRoute.includes(paramUrl.pathname)) {
-                        return true;
+
+                    if (paramUrl.hostname !== nextUrl.hostname) {
+                        return Response.redirect(new URL('/store', nextUrl));
                     }
+
+                    if (
+                        authRoute.includes(paramUrl.pathname) ||
+                        paramUrl.pathname.startsWith(authApiRoute)
+                    ) {
+                        return Response.redirect(new URL('/store', nextUrl));
+                    }
+
+                    if (publicRoute.includes(paramUrl.pathname)) {
+                        return Response.redirect(paramUrl);
+                    }
+
                     return Response.redirect(paramUrl);
                 }
 

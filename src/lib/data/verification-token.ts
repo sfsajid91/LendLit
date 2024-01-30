@@ -23,3 +23,39 @@ export const getVerificationTokenByEmail = async (email: string) => {
         return null;
     }
 };
+
+export const getValidVerificationToken = async (token: string) => {
+    const currentTime = new Date();
+
+    const verificationToken = await prisma.verificationToken.findFirst({
+        where: {
+            token,
+            expires: {
+                gt: currentTime,
+            },
+        },
+        include: {
+            user: true,
+        },
+    });
+
+    return verificationToken;
+};
+
+export const getValidVerificationTokenByEmail = async (email: string) => {
+    const currentTime = new Date();
+
+    const verificationToken = await prisma.verificationToken.findFirst({
+        where: {
+            email,
+            expires: {
+                gt: currentTime,
+            },
+        },
+        include: {
+            user: true,
+        },
+    });
+
+    return verificationToken;
+};

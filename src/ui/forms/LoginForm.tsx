@@ -16,6 +16,7 @@ import { Input } from '@/components/ui/input';
 import { signinAction } from '@/lib/actions/authActions';
 import { signinSchema, type SigninSchemaType } from '@/lib/schema/signinSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
+import Link from 'next/link';
 import { useState } from 'react';
 
 export default function LoginForm() {
@@ -49,65 +50,86 @@ export default function LoginForm() {
     }
 
     return (
-        <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Email</FormLabel>
-                            <FormControl>
-                                <Input
-                                    placeholder="example@lendlit.com"
-                                    {...field}
-                                />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-
-                <FormField
-                    control={form.control}
-                    name="password"
-                    render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Password</FormLabel>
-                            <FormControl>
-                                <Input
-                                    type={showPassword ? 'text' : 'password'}
-                                    {...field}
-                                />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-
-                <div className="items-top flex space-x-2">
-                    <Checkbox
-                        id="showpassword"
-                        // checked={showPassword}
-                        onCheckedChange={toggleShowPassword}
-                    />
-                    <label
-                        htmlFor="showpassword"
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                    >
-                        Show Password
-                    </label>
-                </div>
-
-                <Button
-                    loading={loading}
-                    size="lg"
-                    type="submit"
-                    className="w-full"
+        <>
+            <Form {...form}>
+                <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="space-y-4"
                 >
-                    Login
-                </Button>
-            </form>
-        </Form>
+                    <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Email</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        placeholder="example@lendlit.com"
+                                        {...field}
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    <FormField
+                        control={form.control}
+                        name="password"
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel>Password</FormLabel>
+                                <FormControl>
+                                    <Input
+                                        type={
+                                            showPassword ? 'text' : 'password'
+                                        }
+                                        {...field}
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    <div className="items-top flex space-x-2">
+                        <Checkbox
+                            id="showpassword"
+                            // checked={showPassword}
+                            onCheckedChange={toggleShowPassword}
+                        />
+                        <label
+                            htmlFor="showpassword"
+                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        >
+                            Show Password
+                        </label>
+                    </div>
+
+                    <Button
+                        loading={loading}
+                        size="lg"
+                        type="submit"
+                        className="w-full"
+                    >
+                        Login
+                    </Button>
+                </form>
+            </Form>
+
+            {/* forgot password */}
+            <div className="flex items-center justify-between py-4">
+                <p className="text-sm font-medium text-slate-500">
+                    Forgot Password?
+                </p>
+
+                <Link
+                    href="/forgot-password"
+                    className="text-sm font-medium text-blue-400 peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                    Reset
+                </Link>
+            </div>
+        </>
     );
 }
