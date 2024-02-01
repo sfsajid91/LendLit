@@ -17,7 +17,7 @@ export default async function StorePage({ searchParams }: PageProps) {
     const totalPages = await getTotalPages(search);
 
     return (
-        <div className="px-4 py-2">
+        <>
             <Search />
             <BookList search={search} currentPage={currentPage} />
             <div className="w-full py-4">
@@ -31,6 +31,6 @@ export default async function StorePage({ searchParams }: PageProps) {
                     )
                 }
             </div>
-        </div>
+        </>
     );
 }

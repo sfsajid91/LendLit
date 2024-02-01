@@ -14,7 +14,7 @@ export default function StoreLayout({
             <CartProvider>
                 <div className="max-h-dvh w-full overflow-y-auto">
                     <Navbar />
-                    {children}
+                    <main className="px-4 py-8">{children}</main>
                 </div>
             </CartProvider>
         </div>
